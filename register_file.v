@@ -54,9 +54,14 @@ begin
     end
     else
     begin
-        
-//Add Code for the register file model, as in Home Assignment #2
-
+        //Add Code for the register file model, as in Home Assignment #2
+        if ((READ===1'b1)&&(WRITE===1'b0)) begin //read op
+            reg_ret1 = reg_file_32x32[ADDR_R1];
+            reg_ret2 = reg_file_32x32[ADDR_R2];
+        end
+        else if ((READ===1'b0)&&(WRITE===1'b1)) begin //write op
+            reg_file_32x32[ADDR_W] = DATA_W;
+        end
     end
 end
 endmodule

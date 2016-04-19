@@ -36,14 +36,13 @@ begin
     case (funct)
         `ALU_FUNCT_WIDTH'h20 : result = op1 + op2; // addition
         `ALU_FUNCT_WIDTH'h22 : result = op1 - op2; // subtraction
-        `ALU_FUNCT_WIDTH'h24 : result = op1 * op2; // multiply
-        `ALU_FUNCT_WIDTH'h26 : result = op1 / op2; // divide 
-        `ALU_FUNCT_WIDTH'h28 : result = op1 << op2; // shift logical left
-        `ALU_FUNCT_WIDTH'h30 : result = op1 >> op2; // shift logical right
-        `ALU_FUNCT_WIDTH'h32 : result = op1 & op2; // and
-        `ALU_FUNCT_WIDTH'h34 : result = op1 | op2; // or
-        `ALU_FUNCT_WIDTH'h36 : result = op1 ~| op2; // nor
-        `ALU_FUNCT_WIDTH'h38 : result = (op1 < op2)? 1 : 0; // set if <
+        `ALU_FUNCT_WIDTH'h2c : result = op1 * op2; // multiply
+        `ALU_FUNCT_WIDTH'h01 : result = op1 << op2; // shift logical left
+        `ALU_FUNCT_WIDTH'h02 : result = op1 >> op2; // shift logical right
+        `ALU_FUNCT_WIDTH'h24 : result = op1 & op2; // and
+        `ALU_FUNCT_WIDTH'h25 : result = op1 | op2; // or
+        `ALU_FUNCT_WIDTH'h27 : result = ~(op1 | op2); // nor
+        `ALU_FUNCT_WIDTH'h2a : result = (op1 < op2)? 1 : 0; // set if <
         
         default: result = `DATA_WIDTH'hxxxxxxxx;
                  

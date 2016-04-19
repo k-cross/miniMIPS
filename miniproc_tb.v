@@ -53,12 +53,11 @@ integer pass_test;
 // Clock generator instance
 CLK_GENERATOR clk_gen_inst(.CLK(SYS_CLK));
 
-
 // instantiation of modules for the processor (no separate processor module required)
-
 // Add code to create instance of Control unit
-
-
+CONTROL_UNIT ctrl_inst (.DATA_R1(rf_data_r1), .DATA_R2(rf_data_r2), .READ(rf_read), 
+    .WRITE(rf_write), .ADDR_W(rf_addr_w), .Shamt(Shamt), .OpCode(OpCode), .Funct(funct_reg)
+    .ALU_OP1(alu_op1), .ALU_OP2(alu_op2), .ALU_Code(alu_opcode), .CLK(SYS_CLK), .RST(RST_RF))
 
 
 // Create instance of register file
@@ -140,8 +139,5 @@ pass_test = 0;
     $write("\n");
     $stop; // stop simulation here
 
-
 end
-
-
 endmodule;

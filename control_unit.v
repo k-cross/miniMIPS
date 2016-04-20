@@ -59,16 +59,16 @@ begin
 
     if ((RST === 1'b0)) begin
         proc_state = `STATE_FETCH;
-        READ = 0;
-        WRITE = 0;
+        READ = 1'b0;
+        WRITE = 1'b0;
         end else begin
         case (proc_state)
 
         `STATE_FETCH:
             begin if (OpCode != `NOP) begin 
                proc_state = `STATE_DECODE;
-               READ = 1; 
-               WRITE = 0;
+               READ = 1'b1; 
+               WRITE = 1'b0;
                #50;  
                // manually insert some delay to allow register read to complete
                end
@@ -91,16 +91,17 @@ begin
                 end
                 default: ALU_OP2 = DATA_R2;
                 endcase
+                #50;
             end
 // manually insert some delay to allow alu operation to complete
              
-         `STATE_EXE:
+        `STATE_EXE:
             // Result from ALU is ready and should be written to the register file
             begin
                 // Fill in the code here
                 proc_state = `STATE_IDLE;
-                READ = 0;
-                WRITE = 1;
+                READ = 1'b0;
+                WRITE = 1'b1;
             end
          default: ; // do nothing if proc_state is STATE_IDLE
         endcase
